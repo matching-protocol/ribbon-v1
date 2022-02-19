@@ -167,9 +167,9 @@ library ProtocolAdapter {
 
     function delegateCreateShort(
         IProtocolAdapter adapter,
-        ProtocolAdapterTypes.OptionTerms calldata optionTerms,
+        ProtocolAdapterTypes.OptionTerms memory optionTerms,
         uint256 amount
-    ) external returns (uint256) {
+    ) internal returns (uint256) {
         (bool success, bytes memory result) =
             address(adapter).delegatecall(
                 abi.encodeWithSignature(
@@ -183,7 +183,7 @@ library ProtocolAdapter {
     }
 
     function delegateCloseShort(IProtocolAdapter adapter)
-        external
+        internal
         returns (uint256)
     {
         (bool success, bytes memory result) =
