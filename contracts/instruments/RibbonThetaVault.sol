@@ -40,8 +40,8 @@ contract RibbonThetaVault is DSMath, OptionsVaultStorage {
     // https://github.com/airswap/airswap-protocols/blob/master/source/swap/contracts/interfaces/ISwap.sol
     ISwap public immutable SWAP_CONTRACT;
 
-    // 90% locked in options protocol, 10% of the pool reserved for withdrawals
-    uint256 public constant lockedRatio = 0.9 ether;
+    // 100% locked in options protocol, 0% of the pool reserved for withdrawals
+    uint256 public constant lockedRatio = 1 ether;
 
     uint256 public constant delay = 1 hours;
 
