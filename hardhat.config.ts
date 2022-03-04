@@ -119,7 +119,7 @@ const config: HardhatUserConfig = {
       saveDeployments: true,
       gasMultiplier: 2,
     },
-    avanlance: {
+    avalanche: {
       url: "https://api.avax.network/ext/bc/C/rpc",
       accounts,
       chainId: 43114,
