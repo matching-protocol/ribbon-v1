@@ -1,6 +1,8 @@
 import "dotenv/config";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-waffle";
+import "@typechain/hardhat";
 import "hardhat-deploy";
 import "hardhat-gas-reporter";
 
@@ -22,6 +24,9 @@ const config: HardhatUserConfig = {
       kovan: process.env.ETHERSCAN_API_KEY,
       polygon: process.env.POLYGONSCAN_API_KEY,
       polygonMumbai: process.env.POLYGONSCAN_API_KEY,
+      bsc: process.env.BSCSCAN_API_KEY,
+      bscTestnet: process.env.BSCSCAN_API_KEY,
+      avalanche: process.env.AVALANHE_API_KEY,
     },
   },
   gasReporter: {
@@ -41,19 +46,26 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    ethereum: {
+    eth: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts,
       chainId: 1,
     },
     hardhat: {
       forking: {
-        enabled: process.env.FORKING === "true",
-        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+        url: `${process.env.TEST_URI}`,
+        blockNumber: 11611333,
       },
-      live: false,
-      saveDeployments: true,
-      tags: ["test", "local"],
+    },
+    bsc: {
+      url: `https://bsc-dataseed.binance.org/`,
+      accounts,
+      chainId: 56,
+    },
+    "bsc-testnet": {
+      url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
+      accounts,
+      chainId: 97,
     },
     ropsten: {
       url: `https://eth-ropsten.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
@@ -107,6 +119,13 @@ const config: HardhatUserConfig = {
       saveDeployments: true,
       gasMultiplier: 2,
     },
+    avanlance: {
+      url: "https://api.avax.network/ext/bc/C/rpc",
+      accounts,
+      chainId: 43114,
+      live: true,
+      saveDeployments: true,
+    },
   },
   solidity: {
     version: "0.7.2",
@@ -116,6 +135,13 @@ const config: HardhatUserConfig = {
         runs: 200,
       },
     },
+  },
+  typechain: {
+    outDir: "typechain",
+    target: "web3-v1",
+  },
+  mocha: {
+    timeout: 500000,
   },
 };
 

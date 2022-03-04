@@ -379,3 +379,5 @@ cache/
 
 coverage.json
 coverage/
+
+typechain/
